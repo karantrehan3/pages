@@ -20,6 +20,10 @@ case "$cmd" in
     check_slug "$2"
     mkdir -p "$ROOT/$2"
     cp "$1" "$ROOT/$2/index.html"
+    # keep shared pages out of search engines
+    if ! grep -qi 'name="robots"' "$ROOT/$2/index.html"; then
+      perl -0pi -e 's#(<head[^>]*>)#$1\n<meta name="robots" content="noindex">#i' "$ROOT/$2/index.html"
+    fi
     echo "added $2/  (run 'page.sh default $2' to make it the root page)"
     ;;
   default)
