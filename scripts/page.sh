@@ -32,6 +32,7 @@ case "$cmd" in
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Redirecting…</title>
 <meta http-equiv="refresh" content="0; url=$1/">
 <link rel="canonical" href="$1/">
