@@ -534,7 +534,7 @@ function inchWalk(root,skipI18){const wk=document.createTreeWalker(root,NodeFilt
 if(mainEl)inchWalk(mainEl,true);
 function applyLang(){document.documentElement.lang=LANG;document.title=LANG==='hi'?'टॉयलेट लेआउट के विकल्प':'Toilet layout options';I18.forEach(([e,en,hi])=>{e.innerHTML=LANG==='hi'?hi:en;inchWalk(e,false);});const lb=document.getElementById('langBtn');if(lb)lb.textContent=LANG==='hi'?'English':'हिन्दी';if(ub)ub.textContent=LANG==='hi'?(UNIT==='in'?'mm दिखाएँ':'इंच दिखाएँ'):(UNIT==='in'?'Show mm':'Show inches');document.querySelectorAll('.plan[data-plan]').forEach(el=>{el.innerHTML=planHTML(el.dataset.plan);});}
 
-function planList(){return [...document.querySelectorAll('main .plan[data-plan]')].map(el=>{const art=el.closest('article'),sec=el.closest('section');return {k:el.dataset.plan,g:sec&&sec.querySelector('h2')?sec.querySelector('h2').textContent.trim():'',t:art&&art.querySelector('h3')?art.querySelector('h3').textContent.trim():''};});}
+function planList(){return [...document.querySelectorAll('main .plan[data-plan]')].map(el=>{const art=el.closest('article'),sec=el.closest('section');return {k:el.dataset.plan,g:sec&&sec.querySelector('h2')?sec.querySelector('h2').textContent.trim():'',t:art&&art.querySelector('h3')?art.querySelector('h3').textContent.trim():'',rec:!!(art&&art.classList.contains('recd'))};}).sort((a,b)=>b.rec-a.rec);}
 function printPlans(keys,with3d){let box=document.getElementById('printPlans');if(!box){box=document.createElement('div');box.id='printPlans';document.body.appendChild(box);}
 let h='<h1>'+document.title+'</h1>';
 if(with3d&&window.__ctl&&window.__ctl.snap){const st=window.__ctl.state();const it=planList().find(x=>x.k===st.k)||{g:'',t:''};const des=document.querySelector('#tDesign [aria-pressed="true"]');const cap=document.getElementById('caption');
@@ -543,8 +543,8 @@ planList().filter(x=>keys.includes(x.k)).forEach(x=>{h+='<section class="pp"><h3
 box.innerHTML=h;document.body.classList.add('printing-plans');window.print();}
 window.addEventListener('afterprint',()=>document.body.classList.remove('printing-plans'));
 function openPick(){const box=document.getElementById('printPick'),btn=document.getElementById('printBtn');if(!box.hidden){box.hidden=true;btn.setAttribute('aria-expanded','false');return;}
-const H=LANG==='hi',cur=window.__ctl?window.__ctl.state().k:'';let h='<p class="pp-title">'+(H?'क्या प्रिंट करना है?':'What should be printed?')+'</p><label><input type="checkbox" id="pp3d" checked>'+(H?'अभी दिख रही 3D तस्वीर':'The 3D picture shown now')+'</label>';let last='';
-planList().forEach(x=>{if(x.g!==last){h+='<p class="pp-g">'+x.g+' — '+(H?'नाप वाला नक्शा':'top view with dimensions')+'</p>';last=x.g;}h+='<label><input type="checkbox" class="ppk" value="'+x.k+'"'+(x.k===cur?' checked':'')+'>'+x.t+'</label>';});
+const H=LANG==='hi';let h='<p class="pp-title">'+(H?'क्या प्रिंट करना है?':'What should be printed?')+'</p><label><input type="checkbox" id="pp3d" checked>'+(H?'अभी दिख रही 3D तस्वीर':'The 3D picture shown now')+'</label>';let last='';
+planList().forEach(x=>{const g=x.rec?(H?'सुझाए गए लेआउट — नाप वाला नक्शा':'Recommended layouts — top view with dimensions'):x.g+' — '+(H?'नाप वाला नक्शा':'top view with dimensions');if(g!==last){h+='<p class="pp-g">'+g+'</p>';last=g;}h+='<label><input type="checkbox" class="ppk" value="'+x.k+'"'+(x.rec?' checked':'')+'>'+(x.rec?x.g+' · ':'')+x.t+'</label>';});
 h+='<div class="controls"><button id="ppAll">'+(H?'सारे नक्शे चुनें':'Tick all top views')+'</button><button id="ppGo">'+(H?'प्रिंट करें':'Print')+'</button></div>';
 box.innerHTML=h;box.hidden=false;btn.setAttribute('aria-expanded','true');
 document.getElementById('ppAll').addEventListener('click',()=>box.querySelectorAll('.ppk').forEach(c=>c.checked=true));
