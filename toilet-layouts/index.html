@@ -52,27 +52,37 @@ li{margin:3px 0}
 .plan{margin:14px 0 4px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;overflow-x:auto}
 .plan svg{display:block;width:100%;max-width:460px;height:auto;margin:0 auto}
 .plan .pw{fill:none;stroke:var(--ink);stroke-width:40;stroke-linecap:square}
-.plan .pz{fill:#4F7FA6;fill-opacity:.14}
-.plan .pg{stroke:#4F7FA6;stroke-width:24}
+.plan .pz{fill:#4F7FA6;fill-opacity:.16;stroke:#4F7FA6;stroke-width:6;stroke-dasharray:4 14;stroke-linecap:round}
+.plan .pg{stroke:#2F5F86;stroke-width:28}
+.plan .pgi{stroke:#fff;stroke-width:10}
 .plan .pf{fill:var(--bg);stroke:var(--muted);stroke-width:8}
 .plan .ph{fill:none;stroke:var(--muted);stroke-width:8;stroke-dasharray:30 22}
 .plan .pd{stroke:var(--muted);stroke-width:6;fill:none}
 .plan .pa{fill:none;stroke:var(--muted);stroke-width:6;stroke-dasharray:25 20}
-.plan .pk{stroke:#C4704F;stroke-width:7;fill:none}
+.plan .pk{stroke:#C4704F;stroke-width:8;fill:none;stroke-dasharray:36 16}
 .plan .pj{fill:#4F7FA6;stroke:var(--surface);stroke-width:8}
-.plan .pdr{fill:var(--surface);stroke:var(--ink);stroke-width:8}
-.plan .pgb{stroke:#3F8F4E;stroke-width:34;stroke-linecap:round;fill:none}
+.plan .pgb{stroke:#3F8F4E;stroke-width:26;stroke-linecap:butt;fill:none}
+.plan .pgbe{fill:#fff;stroke:#2E6B3A;stroke-width:12}
 .plan .pgbv{fill:var(--surface);stroke:#3F8F4E;stroke-width:22}
-.plan .pld{fill:#3a3f44}
-.plan .ppm{fill:#1F5FA8;stroke:#fff;stroke-width:10}
-.plan text.ppn{fill:#fff;font-weight:700;font-size:62px}
+.plan .pldo{fill:#fff;stroke:#222;stroke-width:10}
+.plan .pldb{stroke:#222;stroke-width:6;fill:none}
+.plan .ppm{fill:#fff;stroke:#1F5FA8;stroke-width:14}
+.plan text.ppn{fill:#1F5FA8;font-weight:700;font-size:80px}
 .plan .psw{fill:#E0A100;stroke:#8A6400;stroke-width:6}
-.plan .pso{fill:var(--surface);stroke:#E0A100;stroke-width:16}
-.plan .pgbf{stroke-dasharray:60 40;stroke-linecap:butt}
-.plan .pbk{fill:#B8734E;fill-opacity:.55;stroke:#8C4F30;stroke-width:6}
+.plan .pso{fill:#fff;stroke:#8A6400;stroke-width:12}
+.plan .psod{fill:#8A6400}
+.plan .pgbf{stroke-dasharray:45 30}
+.plan .pbk{fill:#E7C3AE;stroke:#8C4F30;stroke-width:8}
+.plan .pbkh{stroke:#8C4F30;stroke-width:6;fill:none}
 .plan text{fill:var(--ink);font:500 72px Figtree,'Noto Sans Devanagari',system-ui,sans-serif}
 .plan .tk{fill:#B0583A;font-weight:600}
 .plan-key{font-size:13px;color:var(--muted);margin:6px 2px 0}
+.plan-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin:8px 2px 0;font-size:13px;color:var(--ink)}
+.plan-legend span{display:inline-flex;align-items:center;gap:6px}
+.plan .plan-legend svg{display:inline-block;width:26px;height:16px;max-width:none;max-height:none;margin:0;flex:none;overflow:visible}
+.plan-legend text{font-size:70px}
+#printPlans .plan-legend{font-size:8.5pt;gap:1mm 4mm;margin:2mm 0 0}
+#printPlans .plan .plan-legend svg{width:7mm;height:4.2mm;max-height:none}
 .rec{display:inline-block;font:600 12px/1.4 Figtree,'Noto Sans Devanagari',system-ui,sans-serif;background:var(--sage);color:var(--surface);padding:2px 9px;border-radius:999px;vertical-align:middle;margin-left:4px;white-space:nowrap}
 .recbar{margin:16px 0 0;padding:12px 14px;background:var(--sage-soft);border-radius:12px}
 .recbar p{margin:0 0 10px}
@@ -184,10 +194,10 @@ body.printing-plans #printPlans{display:block}
 #printPlans .pp h3{font-size:13pt;line-height:1.5;margin:0 0 2mm}
 #printPlans h1,#printPlans h2{line-height:1.5}
 #printPlans .plan{border:1px solid #bbb;margin:0;padding:2mm}
-#printPlans .plan svg{max-width:none;width:100%;max-height:200mm}
+#printPlans .plan svg{max-width:none;width:100%;max-height:178mm}
 #printPlans .plan-key{font-size:9pt!important}
 #printPlans .pdesc{font-size:10pt;margin:2mm 0 0}
-#printPlans .pp.plumb .plan svg{max-height:125mm}
+#printPlans .pp.plumb .plan svg{max-height:96mm}
 #printPlans .pp.plumb .plan-key{margin:1mm 0!important}
 #printPlans .ptab td:last-child{white-space:nowrap}
 #printPlans .ptab{width:100%;border-collapse:collapse;font-size:8.5pt;line-height:1.3;margin-top:2mm}
@@ -433,8 +443,8 @@ const P={
 k:[{a:[0,0],b:[2350,0],o:-330},{a:[0,0],b:[900,0],o:-160},{a:[1650,0],b:[2250,0],o:-160},{a:[2350,0],b:[2350,1460],o:250},{a:[900,0],b:[900,550],o:-120,t:'550 entry'},{a:[900,1460],b:[1135,1460],o:90},{a:[1135,1460],b:[1465,1460],o:90},{a:[1465,1460],b:[1640,1460],o:90},{a:[1300,805],b:[1300,0],o:0,c:1,t:'805 clear'},{a:[1640,1460],b:[2315,1460],o:200,t:'Door 675, opens out'}]},
 '2':{w:2350,d:1460,o:T1,i:[{t:'ld',r:[50,80,110,1380]},{t:'so',c:[1000,1420]},{t:'sw',r:[2310,1315,2350,1405]},{t:'bk',r:[2235,120,2350,720]},{t:'gb',l:[1700,60,2190,60]},{t:'gbv',c:[820,40]},{t:'jet',c:[2195,160],d:[2090,160]},{t:'z',r:[0,0,900,1460],l:'Shower 900 × 1460'},{t:'g',l:[900,550,900,1460]},{t:'wc',c:[1965,420],v:0},{t:'f',r:[1000,1010,1600,1460],l:'Basin 600 × 450'},d1out],
 k:[{a:[0,0],b:[2350,0],o:-330},{a:[0,0],b:[900,0],o:-160},{a:[2350,0],b:[2350,1460],o:250},{a:[900,0],b:[900,550],o:-120,t:'550 entry'},{a:[2350,0],b:[2350,255],o:120},{a:[2350,255],b:[2350,585],o:120},{a:[2350,585],b:[2350,1460],o:120},{a:[900,420],b:[1695,420],o:0,c:1,t:'795 clear'},{a:[1000,1460],b:[1600,1460],o:170},{a:[1640,1460],b:[2315,1460],o:360,t:'Door 675, opens out'}]},
-'3':{w:2350,d:1460,o:T1,i:[{t:'ld',r:[50,80,110,1380]},{t:'so',c:[2310,350]},{t:'sw',r:[1505,1420,1595,1460]},{t:'bk',r:[1025,0,1625,115]},{t:'gb',l:[1720,100,1720,480]},{t:'gbv',c:[820,1420]},{t:'jet',c:[1065,155],d:[1065,260]},{t:'z',r:[0,0,900,1460],l:'Shower 900 × 1460'},{t:'g',l:[900,0,900,900]},{t:'wc',c:[1325,385],v:1},{t:'f',r:[1750,0,2350,500],l:'Basin 600 × 500'},{t:'f',r:[1900,500,2350,800]},{t:'h',r:[2100,550,2350,1000],l:'Cabinet above 1950'},d1out],
-k:[{a:[0,0],b:[2350,0],o:-330},{a:[0,0],b:[900,0],o:-160},{a:[1750,0],b:[2350,0],o:-160},{a:[2350,0],b:[2350,1460],o:250},{a:[900,900],b:[900,1460],o:-120,t:'560 entry'},{a:[900,720],b:[1160,720],o:0,q:1},{a:[1160,720],b:[1490,720],o:0,q:1},{a:[1490,720],b:[1750,720],o:0,q:1},{a:[1200,655],b:[1200,1460],o:0,c:1,t:'805 clear'},{a:[1800,800],b:[1800,1460],o:0,c:1,t:'660'}]},
+'3':{w:2350,d:1460,o:T1,i:[{t:'ld',r:[50,80,110,1380]},{t:'so',c:[2310,350]},{t:'sw',r:[1505,1420,1595,1460]},{t:'bk',r:[1025,0,1625,115]},{t:'gb',l:[1720,100,1720,480]},{t:'gbv',c:[820,1420]},{t:'jet',c:[1065,155],d:[1065,260]},{t:'z',r:[0,0,900,1460],l:'Shower 900 × 1460'},{t:'g',l:[900,0,900,900]},{t:'wc',c:[1325,385],v:1},{t:'f',r:[1750,0,2350,500],l:'Basin 600 × 500'},{t:'f',r:[1900,500,2350,800]},{t:'h',r:[2100,550,2350,1000],l:'Cab. above 1950'},d1out],
+k:[{a:[0,0],b:[2350,0],o:-330},{a:[0,0],b:[900,0],o:-160},{a:[1750,0],b:[2350,0],o:-160},{a:[2350,0],b:[2350,1460],o:330},{a:[900,900],b:[900,1460],o:-120,t:'560 entry'},{a:[900,720],b:[1160,720],o:0,q:1},{a:[1160,720],b:[1490,720],o:0,q:1},{a:[1490,720],b:[1750,720],o:0,q:1},{a:[1200,655],b:[1200,1460],o:0,c:1,t:'805 clear'},{a:[1800,800],b:[1800,1460],o:0,c:1,t:'660'}]},
 '4':{w:2350,d:1460,o:T1,i:[{t:'ld',r:[50,80,110,1380]},{t:'so',c:[2310,300]},{t:'sw',r:[1505,1420,1595,1460]},{t:'bk',r:[1025,0,1625,115]},{t:'gb',l:[1720,100,1720,430]},{t:'gbv',c:[820,1420]},{t:'jet',c:[1065,155],d:[1065,260]},{t:'z',r:[0,0,900,1460],l:'Shower 900 × 1460'},{t:'g',l:[900,0,900,900]},{t:'wc',c:[1325,385],v:1},{t:'f',r:[1750,0,2350,450],l:'Cabinet'},{t:'f',r:[1950,450,2350,950],l:'Basin'},d1out],
 k:[{a:[0,0],b:[2350,0],o:-330},{a:[0,0],b:[900,0],o:-160},{a:[2350,0],b:[2350,1460],o:250},{a:[2350,450],b:[2350,950],o:120,t:'500'},{a:[900,900],b:[900,1460],o:-120,t:'560 entry'},{a:[1200,655],b:[1200,1460],o:0,c:1,t:'805 clear'},{a:[2150,950],b:[2150,1460],o:0,c:1,t:'510'}]},
 '5':{w:2350,d:1460,o:T1,i:[{t:'ld',r:[90,90,210,210]},{t:'so',c:[2300,40]},{t:'sw',r:[1505,1420,1595,1460]},{t:'gb',f:1,l:[0,820,600,820]},{t:'gbv',c:[1050,40]},{t:'jet',c:[40,1290],d:[130,1290]},{t:'z',r:[0,0,1100,650],l:'Shower area'},{t:'g',l:[1100,0,1100,650]},{t:'wc',c:[270,1030],v:0},{t:'f',r:[1600,0,2260,430],l:'Basin 660 × 430'},{t:'a',l:[1100,650,540,850]},d1out],
@@ -466,7 +476,7 @@ const ADD={
 };
 Object.keys(ADD).forEach(k=>{P[k].k=P[k].k.concat(ADD[k],k.startsWith('T2')?T2BASE:[]);});
 let UNIT='in';let LANG='hi';try{const sv=localStorage.getItem('lang');if(sv==='en'||sv==='hi')LANG=sv;}catch(e){}
-const PTR=[['Shower area','शावर की जगह'],['Shower','शावर'],['Basin counter','बेसिन काउंटर'],['Washer + basin','मशीन + बेसिन'],['Washer','वॉशिंग मशीन'],['Basin','बेसिन'],['Cabinet above','ऊपर कैबिनेट, ऊँचाई'],['Cabinet','कैबिनेट'],['Cab.','कैबि.'],['Seat','सीट'],['Door','दरवाज़ा'],['opens out','बाहर खुलता'],['entry','रास्ता'],['clear','खाली'],['gap','जगह'],['glass','काँच'],['opening','रास्ता'],['door','दरवाज़ा']];
+const PTR=[['Cab. above','ऊपर कैबि.'],['Shower area','शावर की जगह'],['Shower','शावर'],['Basin counter','बेसिन काउंटर'],['Washer + basin','मशीन + बेसिन'],['Washer','वॉशिंग मशीन'],['Basin','बेसिन'],['Cabinet above','ऊपर कैबिनेट, ऊँचाई'],['Cabinet','कैबिनेट'],['Cab.','कैबि.'],['Seat','सीट'],['Door','दरवाज़ा'],['opens out','बाहर खुलता'],['entry','रास्ता'],['clear','खाली'],['gap','जगह'],['glass','काँच'],['opening','रास्ता'],['door','दरवाज़ा']];
 function trPlan(t){PTR.forEach(([a,b])=>{t=t.split(a).join(b);});return t;}
 function inch(mm){const v=Math.round(mm/25.4*2)/2;const w=Math.floor(v);return (w?w:'')+(v>w?'½':'')+'″';}
 function fmt(mm){return UNIT==='in'?inch(mm):String(Math.round(mm));}
@@ -480,31 +490,46 @@ function dim(k){if(k.n)return txt(k.n[0],k.n[1],conv(k.t),'tk');const cls=k.c?'p
 if(az===bz){const y=az+k.o;if(k.o)s+='<path class="pd" d="M'+ax+' '+az+'V'+y+'M'+bx+' '+bz+'V'+y+'"/>';s+='<path class="'+cls+'" d="M'+ax+' '+y+'H'+bx+'M'+(ax-25)+' '+(y+25)+'l50 -50M'+(bx-25)+' '+(y+25)+'l50 -50"/>';s+=txt((ax+bx)/2,y-(k.o>0?-60:60),lab(k,Math.abs(bx-ax)),tc);}
 else{const x=ax+k.o;if(k.o)s+='<path class="pd" d="M'+ax+' '+az+'H'+x+'M'+bx+' '+bz+'H'+x+'"/>';s+='<path class="'+cls+'" d="M'+x+' '+az+'V'+bz+'M'+(x-25)+' '+(az+25)+'l50 -50M'+(x-25)+' '+(bz+25)+'l50 -50"/>';s+=txt(x+(k.o>0?60:-60),(az+bz)/2,lab(k,Math.abs(bz-az)),tc,1);}
 return s;}
+/* black-and-white friendly symbols: drains as a grate of cells, brick as diagonal hatching */
+function grate(x0,y0,x1,y1){const w=x1-x0,h=y1-y0,st=30;let s='<rect class="pldo" x="'+x0+'" y="'+y0+'" width="'+w+'" height="'+h+'"/><path class="pldb" d="';
+if(w>=h){for(let x=x0+st;x<x1-5;x+=st)s+='M'+x+' '+y0+'V'+y1;}if(h>=w){for(let y=y0+st;y<y1-5;y+=st)s+='M'+x0+' '+y+'H'+x1;}return s+'"/>';}
+function hatch(x0,y0,x1,y1){const w=x1-x0,h=y1-y0,st=40;let d='';for(let c=st;c<w+h;c+=st)d+='M'+(x0+Math.max(0,c-h))+' '+(y0+Math.min(c,h))+'L'+(x0+Math.min(c,w))+' '+(y0+Math.max(0,c-w));
+return '<rect class="pbk" x="'+x0+'" y="'+y0+'" width="'+w+'" height="'+h+'"/><path class="pbkh" d="'+d+'"/>';}
+function glass(a,b,c,d){const l='M'+a+' '+b+'L'+c+' '+d;return '<path class="pg" d="'+l+'"/><path class="pgi" d="'+l+'"/>';}
+function bar(l,f){return '<path class="pgb'+(f?' pgbf':'')+'" d="M'+l[0]+' '+l[1]+'L'+l[2]+' '+l[3]+'"/><circle class="pgbe" cx="'+l[0]+'" cy="'+l[1]+'" r="30"/><circle class="pgbe" cx="'+l[2]+'" cy="'+l[3]+'" r="30"/>';}
+function sock(c){return '<circle class="pso" cx="'+c[0]+'" cy="'+c[1]+'" r="38"/><circle class="psod" cx="'+(c[0]-14)+'" cy="'+c[1]+'" r="8"/><circle class="psod" cx="'+(c[0]+14)+'" cy="'+c[1]+'" r="8"/>';}
 function item(i){if(i.t==='z')return '<rect class="pz" x="'+i.r[0]+'" y="'+i.r[1]+'" width="'+(i.r[2]-i.r[0])+'" height="'+(i.r[3]-i.r[1])+'"/>'+txt((i.r[0]+i.r[2])/2,(i.r[1]+i.r[3])/2,conv(i.l));
-if(i.t==='g')return '<path class="pg" d="M'+i.l[0]+' '+i.l[1]+'L'+i.l[2]+' '+i.l[3]+'"/>';
+if(i.t==='g')return glass(i.l[0],i.l[1],i.l[2],i.l[3]);
 if(i.t==='a')return '<path class="pa" d="M'+i.l[0]+' '+i.l[1]+'L'+i.l[2]+' '+i.l[3]+'"/>';
 if(i.t==='f'||i.t==='h'){const w=i.r[2]-i.r[0],h=i.r[3]-i.r[1];let s='<rect class="'+(i.t==='f'?'pf':'ph')+'" x="'+i.r[0]+'" y="'+i.r[1]+'" width="'+w+'" height="'+h+'"/>';if(i.l)s+=txt(i.r[0]+w/2,i.r[1]+h/2,conv(i.l),'',h>w*1.3&&w<450);return s;}
-if(i.t==='jet')return '<rect class="pdr" x="'+(i.d[0]-50)+'" y="'+(i.d[1]-50)+'" width="100" height="100"/><path class="pdr" d="M'+(i.d[0]-30)+' '+i.d[1]+'h60M'+i.d[0]+' '+(i.d[1]-30)+'v60"/><circle class="pj" cx="'+i.c[0]+'" cy="'+i.c[1]+'" r="45"/>';
-if(i.t==='so')return '<circle class="pso" cx="'+i.c[0]+'" cy="'+i.c[1]+'" r="38"/>';
+if(i.t==='jet')return grate(i.d[0]-50,i.d[1]-50,i.d[0]+50,i.d[1]+50)+'<circle class="pj" cx="'+i.c[0]+'" cy="'+i.c[1]+'" r="45"/>';
+if(i.t==='so')return sock(i.c);
 if(i.t==='sw')return '<rect class="psw" x="'+i.r[0]+'" y="'+i.r[1]+'" width="'+(i.r[2]-i.r[0])+'" height="'+(i.r[3]-i.r[1])+'"/>';
-if(i.t==='ld')return '<rect class="pld" x="'+i.r[0]+'" y="'+i.r[1]+'" width="'+(i.r[2]-i.r[0])+'" height="'+(i.r[3]-i.r[1])+'"/>';
-if(i.t==='bk')return '<rect class="pbk" x="'+i.r[0]+'" y="'+i.r[1]+'" width="'+(i.r[2]-i.r[0])+'" height="'+(i.r[3]-i.r[1])+'"/>';
-if(i.t==='gb')return '<path class="pgb'+(i.f?' pgbf':'')+'" d="M'+i.l[0]+' '+i.l[1]+'L'+i.l[2]+' '+i.l[3]+'"/>';
+if(i.t==='ld')return grate(i.r[0],i.r[1],i.r[2],i.r[3]);
+if(i.t==='bk')return hatch(i.r[0],i.r[1],i.r[2],i.r[3]);
+if(i.t==='gb')return bar(i.l,i.f);
 if(i.t==='gbv')return '<circle class="pgbv" cx="'+i.c[0]+'" cy="'+i.c[1]+'" r="40"/>';
 if(i.t==='wc'){const rx=i.v?165:270,ry=i.v?270:165;return '<ellipse class="pf" cx="'+i.c[0]+'" cy="'+i.c[1]+'" rx="'+rx+'" ry="'+ry+'"/>'+txt(i.c[0],i.c[1],conv('Seat'));}
 if(i.t==='door'){const r=Math.hypot(i.a[0]-i.h[0],i.a[1]-i.h[1]);return '<path class="pd" d="M'+i.h[0]+' '+i.h[1]+'L'+i.b[0]+' '+i.b[1]+'"/><path class="pa" d="M'+i.a[0]+' '+i.a[1]+'A'+r+' '+r+' 0 0 '+i.s+' '+i.b[0]+' '+i.b[1]+'"/>';}
 return '';}
+/* colour legend under each plan: only symbols that plan actually uses */
+const SW={z:'<rect class="pz" x="10" y="10" width="180" height="100"/>',g:glass(10,60,190,60),f:'<rect class="pf" x="20" y="15" width="160" height="90"/>',h:'<rect class="ph" x="20" y="15" width="160" height="90"/>',door:'<path class="pa" d="M20 105A150 150 0 0 1 170 15"/><path class="pd" d="M20 105V15"/>',jet:'<circle class="pj" cx="100" cy="60" r="45"/>',ld:grate(50,10,150,110),gb:bar([30,60,170,60]),gbf:bar([30,60,170,60],1),gbv:'<circle class="pgbv" cx="100" cy="60" r="40"/>',bk:hatch(10,25,190,95),sw:'<rect class="psw" x="55" y="35" width="90" height="50"/>',so:sock([100,60]),k:'<path class="pk" d="M15 60H185M0 85l30 -50M170 85l30 -50"/><text class="tk" x="100" y="40" text-anchor="middle" font-size="60">24″</text>',pm:'<circle class="ppm" cx="100" cy="60" r="52"/><text class="ppn" x="100" y="62" text-anchor="middle" dominant-baseline="middle">1</text>'};
+const SWT={z:['Shower (wet area)','शावर (गीली जगह)'],g:['Glass','शीशा'],f:['Seat, basin, cabinet, washer','सीट, बेसिन, कैबिनेट, मशीन'],h:['Wall cabinet / mirror above','ऊपर दीवार की कैबिनेट / शीशा'],door:['Door swing','दरवाज़ा खुलने की जगह'],jet:['Jet spray','जेट स्प्रे'],ld:['Floor drain','फ़र्श की नाली'],gb:['Grab bar','पकड़ने का हैंडल'],gbf:['Fold-up grab bar','ऊपर मुड़ने वाला हैंडल'],gbv:['Upright grab bar (shower)','खड़ा हैंडल (शावर)'],bk:['Extra 4½″ brick behind seat','सीट के पीछे 4½″ अतिरिक्त ईंट'],sw:['Switch board','स्विच बोर्ड'],so:['Socket','सॉकेट'],k:['Free space to walk / use','चलने / इस्तेमाल की खाली जगह'],pm:['Plumbing point (see list)','प्लंबिंग पॉइंट (सूची देखें)']};
+function legendHTML(p,plumb){const has=t=>p.i.some(i=>i.t===t),deco=['gb','gbf','gbv','sw','so'];
+let ks=['z','g','f','h','door','jet','ld','gb','gbf','gbv','bk','sw','so','k'].filter(k=>k==='door'?has('door')||has('a')||p.i.includes(d1out)||p.i.includes(d2)||p.i.includes(d1in):k==='k'?p.k.some(x=>x.c):k==='gb'?p.i.some(i=>i.t==='gb'&&!i.f):k==='gbf'?p.i.some(i=>i.t==='gb'&&i.f):k==='f'?has('f')||has('wc'):has(k));
+if(plumb)ks=ks.filter(k=>!deco.includes(k)&&k!=='k').concat('pm');
+return '<div class="plan-legend">'+ks.map(k=>'<span><svg viewBox="0 0 200 120" aria-hidden="true">'+SW[k]+'</svg>'+SWT[k][LANG==='hi'?1:0]+'</span>').join('')+'</div>';}
 function planHTML(key,plumb){const p=P[key];if(!p)return '';const m=460;const h=p.d+(key==='2'||p.o===T1?700:300);
 let s='<svg viewBox="'+(-m)+' '+(-m)+' '+(p.w+2*m)+' '+(h+m)+'" role="img" aria-label="Dimensioned floor plan, measurements in millimetres">';
-/* switch and socket marks on top, so slabs and cabinets drawn under them don't hide them */const top=i=>i.t==='sw'||i.t==='so',deco=i=>plumb&&['gb','gbv','sw','so','jet'].includes(i.t);p.i.filter(i=>!top(i)&&!deco(i)).concat(p.i.filter(i=>top(i)&&!deco(i))).forEach(i=>s+=item(i));s+='<path class="pw" d="'+p.o+'"/>';p.k.forEach(k=>s+=dim(k));
-if(plumb)plumbPoints(key).forEach((q,n)=>{s+='<circle class="ppm" cx="'+q.m[0]+'" cy="'+q.m[1]+'" r="52"/>'+txt(q.m[0],q.m[1],String(n+1),'ppn');});
-if(plumb)return s+'</svg><p class="plan-key">'+(LANG==='hi'?'प्लंबर के लिए नक्शा: पीछे की दीवार ऊपर, दरवाज़ा नीचे। नीले नंबर नीचे की सूची के प्लंबिंग पॉइंट हैं; गहरी पट्टी लंबी शावर नाली है।':'Plumbing plan: back wall at the top, door at the bottom. Blue numbers mark the plumbing points listed below; the dark strip is the long shower drain.')+'</p>';
-s+='</svg><p class="plan-key">'+(LANG==='hi'?'ऊपर से नक्शा: पीछे की दीवार ऊपर, दरवाज़ा नीचे। '+(UNIT==='in'?'नाप इंच में, नज़दीकी ½″ तक':'नाप मिलीमीटर में')+'; नारंगी अंक चलने-फिरने और इस्तेमाल की खाली जगह दिखाते हैं; सीट के पास नीला बिंदु जेट स्प्रे है, उसके बगल में छोटी फ़र्श नाली; हरे निशान पकड़ने वाले हैंडल (ग्रैब बार) हैं (धारीदार वाले दीवार से ऊपर मुड़ जाते हैं, हरा गोला शावर में खड़ा हैंडल है); शावर में गहरी पट्टी या चौकोर उसकी फ़र्श नाली है'+(p.i.some(i=>i.t==='bk')?'; ईंट-लाल पट्टी सीट के पीछे की अतिरिक्त 4½″ ईंट की दीवार है':'')+'; दरवाज़े के पास पीला निशान अंदर का स्विच बोर्ड है'+(p.i.some(i=>i.t==='so')?', और शीशे के पास पीला गोला सॉकेट है':'')+'।':'Plan view, back wall at the top, door at the bottom. '+(UNIT==='in'?'Measurements in inches, to the nearest ½″':'Measurements in mm')+'; orange figures are walking and working clearances; the blue dot beside the seat is the jet spray, with a small floor drain next to it; green marks are grab bars (dashed ones fold up against the wall, a green ring is an upright bar in the shower); the dark strip or square in the shower is its floor drain'+(p.i.some(i=>i.t==='bk')?'; the brick-red strip is the extra 4½″ brick behind the seat':'')+'; the yellow mark by the door is the inside switch board'+(p.i.some(i=>i.t==='so')?', and the yellow ring near the mirror is a socket':'')+'.')+'</p>';return s;}
+/* switch and socket marks on top, so slabs and cabinets drawn under them don't hide them */const top=i=>i.t==='sw'||i.t==='so',deco=i=>plumb&&['gb','gbv','sw','so'].includes(i.t);p.i.filter(i=>!top(i)&&!deco(i)).concat(p.i.filter(i=>top(i)&&!deco(i))).forEach(i=>s+=item(i));s+='<path class="pw" d="'+p.o+'"/>';p.k.forEach(k=>s+=dim(k));
+if(plumb)plumbPoints(key).forEach((q,n)=>{s+='<circle class="ppm" cx="'+q.m[0]+'" cy="'+q.m[1]+'" r="66"/>'+txt(q.m[0],q.m[1],String(n+1),'ppn');});
+if(plumb)return s+'</svg>'+legendHTML(p,true)+'<p class="plan-key">'+(LANG==='hi'?'प्लंबर के लिए नक्शा: पीछे की दीवार ऊपर, दरवाज़ा नीचे। नीले नंबर नीचे की सूची के प्लंबिंग पॉइंट हैं।':'Plumbing plan: back wall at the top, door at the bottom. Blue numbers mark the plumbing points listed below.')+'</p>';
+s+='</svg>'+legendHTML(p,false)+'<p class="plan-key">'+(LANG==='hi'?'ऊपर से नक्शा: पीछे की दीवार ऊपर, दरवाज़ा नीचे। '+(UNIT==='in'?'नाप इंच में, नज़दीकी ½″ तक':'नाप मिलीमीटर में')+'।':'Plan view, back wall at the top, door at the bottom. '+(UNIT==='in'?'Measurements in inches, to the nearest ½″':'Measurements in mm')+'.')+'</p>';return s;}
 
 /* plumbing points per layout: wall, distance along it (mm), plan mark position, and rows [English, Hindi, height mm | text | null] */
 const PR={
 seat:(fl,bk)=>[['Seat drain (wall-hung seat), centre'+(bk?', on the 4½″ brick backing (115 mm out)':''),'सीट की निकासी (दीवार पर लटकी सीट), बीच'+(bk?', 4½″ ईंट की परत पर (115 mm आगे)':''),230],['Flush valve fed from the overhead tank, button','ऊपर की टंकी से आने वाला फ्लश वाल्व, बटन',fl]],
-jet:bk=>[['Jet spray: cold water point with its own stop valve'+(bk?', on the brick backing':''),'जेट स्प्रे: ठंडे पानी का पॉइंट, अपने स्टॉप वाल्व के साथ'+(bk?', ईंट की परत पर':''),600],['Small floor drain (100 mm) just below it, about 100 mm out from the wall','उसके ठीक नीचे छोटी फ़र्श नाली (100 mm), दीवार से लगभग 100 mm आगे',null]],
+jet:bk=>[['Jet spray: cold water point with its own stop valve'+(bk?', on the brick backing':''),'जेट स्प्रे: ठंडे पानी का पॉइंट, अपने स्टॉप वाल्व के साथ'+(bk?', ईंट की परत पर':''),600],['Small floor drain (100 mm) just below it, about '+(bk?'150 mm out from the brick face':'130 mm out from the wall'),'उसके ठीक नीचे छोटी फ़र्श नाली (100 mm), '+(bk?'ईंट की परत से लगभग 150 mm आगे':'दीवार से लगभग 130 mm आगे'),null]],
 basin:[['Basin hot + cold angle valves','बेसिन के गर्म + ठंडे एंगल वाल्व',550],['Basin waste','बेसिन की निकासी',450]],
 basinSlab:[['Basin hot + cold, just above the slab','बेसिन का गर्म + ठंडा, स्लैब के ठीक ऊपर',1000],['Basin waste, down behind the washer','बेसिन की निकासी, मशीन के पीछे से नीचे',950]],
 washF:[['Washer water inlet, under the slab (front-loader)','मशीन का पानी, स्लैब के नीचे (फ्रंट-लोड)',750],['Washer drain with a trap, under the slab','ट्रैप के साथ मशीन की निकासी, स्लैब के नीचे',500]],
@@ -516,16 +541,16 @@ sq:[['Square shower floor drain, 120 mm','चौकोर शावर फ़र
 const PW=(w,pos,m,rows)=>({w,pos,m,rows}),PF=(x,y,m,rows)=>({w:'floor',x,y,m,rows}),PS=(along,a,b,m)=>({w:'strip',along,a,b,m,rows:PR.ld});
 function plumbPoints(k){const st=window.__ctl?window.__ctl.state():{},top=st.w==='top',old=st.b==='old';const T1LD=PS('left',80,1380,[80,1250]);
 switch(k){
-case '1':return [PW('door',1300,[1300,1270],PR.seat(820,1)),PW('door',1560,[1560,1270],PR.jet(1)),PW('back',1950,[1950,90],PR.basin),PW('back',450,[450,90],PR.sh1),T1LD];
-case '2':return [PW('right',420,[2160,420],PR.seat(820,1)),PW('right',160,[2160,160],PR.jet(1)),PW('door',1300,[1300,1370],PR.basin),PW('back',450,[450,90],PR.sh1),T1LD];
-case '3':return [PW('back',1325,[1325,190],PR.seat(820,1)),PW('back',1065,[1065,190],PR.jet(1)),PW('back',old?2020:2050,[old?2020:2050,90],PR.basin),PW('back',450,[450,90],PR.sh1),T1LD];
-case '4':return [PW('back',1325,[1325,190],PR.seat(820,1)),PW('back',1065,[1065,190],PR.jet(1)),PW('right',700,[2260,700],PR.basin),PW('back',450,[450,90],PR.sh1),T1LD];
-case '5':return [PW('left',1030,[90,1030],PR.seat(950)),PW('left',1290,[90,1290],PR.jet(0)),PW('back',1930,[1930,90],PR.basin),PW('left',330,[90,330],PR.sh1),PF(150,150,[150,150],PR.sq)];
-case 'T2-1':return [PW('left',1385,[90,1385],PR.seat(950)),PW('left',1645,[90,1645],PR.jet(0)),PW('back',1220,[1220,90],PR.sh2),PS('back',100,1500,[500,80]),PW('right',1372,[1510,1372],PR.basin),PW('right',2115,[1510,2115],top?PR.washT:PR.washF)];
-case 'T2-2':return [PW('left',1385,[90,1385],PR.seat(950)),PW('left',1645,[90,1645],PR.jet(0)),PW('back',1220,[1220,90],PR.sh2),PS('back',100,1500,[500,80]),PW('right',2115,[1510,2115],PR.basinSlab.concat(PR.washF))];
-case 'T2-3':return [PW('back',356,[356,90],PR.seat(950)),PW('back',96,[96,90],PR.jet(0)),PW('back',1220,[1220,90],PR.sh2),PS('right',50,850,[1520,450])].concat(top?[PW('left',1420,[90,1420],PR.basin),PW('right',2115,[1510,2115],PR.washT)]:[PW('right',2115,[1510,2115],PR.basinSlab.concat(PR.washF))]);
-case 'T2-4':return [PW('back',445,[445,90],PR.seat(950)),PW('back',185,[185,90],PR.jet(0)),PW('back',1220,[1220,90],PR.sh2),PS('right',50,850,[1520,450]),PW('right',1525,[1510,1525],PR.basin),PW('right',2115,[1510,2115],top?PR.washT:PR.washF)];
-case 'T2-5':return [PW('back',1190,[1190,90],PR.seat(950)),PW('back',930,[930,90],PR.jet(0)),PW('back',390,[390,90],PR.sh2),PS('left',50,780,[80,420]),PW('left',1555,[90,1555],PR.basin),PW('right',2115,[1510,2115],top?PR.washT:PR.washF)];}
+case '1':return [PW('door',1300,[1300,1270],PR.seat(820,1)),PW('door',1560,[1560,1080],PR.jet(1)),PW('back',1950,[1950,90],PR.basin),PW('back',450,[450,90],PR.sh1),T1LD];
+case '2':return [PW('right',420,[2160,420],PR.seat(820,1)),PW('right',160,[1960,160],PR.jet(1)),PW('door',1300,[1300,1370],PR.basin),PW('back',450,[450,90],PR.sh1),T1LD];
+case '3':return [PW('back',1325,[1325,190],PR.seat(820,1)),PW('back',1065,[1065,370],PR.jet(1)),PW('back',old?2020:2050,[old?2020:2050,90],PR.basin),PW('back',450,[450,90],PR.sh1),T1LD];
+case '4':return [PW('back',1325,[1325,190],PR.seat(820,1)),PW('back',1065,[1065,370],PR.jet(1)),PW('right',700,[2260,870],PR.basin),PW('back',450,[450,90],PR.sh1),T1LD];
+case '5':return [PW('left',1030,[90,1030],PR.seat(950)),PW('left',1290,[250,1290],PR.jet(0)),PW('back',1930,[1930,90],PR.basin),PW('left',330,[90,330],PR.sh1),PF(150,150,[300,150],PR.sq)];
+case 'T2-1':return [PW('left',1385,[90,1385],PR.seat(950)),PW('left',1645,[250,1620],PR.jet(0)),PW('back',1220,[1220,200],PR.sh2),PS('back',100,1500,[500,80]),PW('right',1372,[1510,1060],PR.basin),PW('right',2115,[1510,1920],top?PR.washT:PR.washF)];
+case 'T2-2':return [PW('left',1385,[90,1385],PR.seat(950)),PW('left',1645,[250,1620],PR.jet(0)),PW('back',1220,[1220,200],PR.sh2),PS('back',100,1500,[500,80]),PW('right',2115,[1510,1920],PR.basinSlab.concat(PR.washF))];
+case 'T2-3':return [PW('back',356,[356,90],PR.seat(950)),PW('back',96,[96,240],PR.jet(0)),PW('back',1220,[1220,200],PR.sh2),PS('right',50,850,[1520,450])].concat(top?[PW('left',1420,[90,1420],PR.basin),PW('right',2115,[1510,1920],PR.washT)]:[PW('right',2115,[1510,1920],PR.basinSlab.concat(PR.washF))]);
+case 'T2-4':return [PW('back',445,[445,90],PR.seat(950)),PW('back',185,[185,240],PR.jet(0)),PW('back',1220,[1220,200],PR.sh2),PS('right',50,850,[1520,450]),PW('right',1525,[1510,1525],PR.basin),PW('right',2115,[1510,1920],top?PR.washT:PR.washF)];
+case 'T2-5':return [PW('back',1190,[1190,90],PR.seat(950)),PW('back',930,[930,240],PR.jet(0)),PW('back',390,[390,90],PR.sh2),PS('left',50,780,[80,420]),PW('left',1555,[90,1555],PR.basin),PW('right',2115,[1510,1920],top?PR.washT:PR.washF)];}
 return [];}
 function mmIn(v){return v+' mm ('+inch(v)+')';}
 function whereTxt(q,H){if(q.w==='floor')return H?'फ़र्श, बाईं दीवार से '+mmIn(q.x)+', पीछे की दीवार से '+mmIn(q.y):'Floor, '+mmIn(q.x)+' from the left wall, '+mmIn(q.y)+' from the back wall';
