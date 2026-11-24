@@ -74,14 +74,15 @@ li{margin:3px 0}
 .plan .pgbf{stroke-dasharray:45 30}
 .plan .pbk{fill:#E7C3AE;stroke:#8C4F30;stroke-width:8}
 .plan .pbkh{stroke:#8C4F30;stroke-width:6;fill:none}
-.plan text{fill:var(--ink);font:500 72px Figtree,'Noto Sans Devanagari',system-ui,sans-serif}
+.plan text{fill:var(--ink);font:500 72px Figtree,'Noto Sans Devanagari',system-ui,sans-serif;paint-order:stroke;stroke:var(--surface);stroke-width:18px;stroke-linejoin:round}
 .plan .tk{fill:#B0583A;font-weight:600}
 .plan-key{font-size:13px;color:var(--muted);margin:6px 2px 0}
-.plan-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin:8px 2px 0;font-size:13px;color:var(--ink)}
+.plan-legend{display:flex;flex-direction:column;gap:4px;margin:8px 2px 0;font-size:13px;color:var(--ink)}
 .plan-legend span{display:inline-flex;align-items:center;gap:6px}
 .plan .plan-legend svg{display:inline-block;width:26px;height:16px;max-width:none;max-height:none;margin:0;flex:none;overflow:visible}
 .plan-legend text{font-size:70px}
-#printPlans .plan-legend{font-size:8.5pt;gap:1mm 4mm;margin:2mm 0 0}
+#printPlans .plan-legend{display:block;columns:2;column-gap:6mm;font-size:8.5pt;margin:2mm 0 0}
+#printPlans .plan-legend span{display:flex;break-inside:avoid;margin:0 0 .8mm}
 #printPlans .plan .plan-legend svg{width:7mm;height:4.2mm;max-height:none}
 .rec{display:inline-block;font:600 12px/1.4 Figtree,'Noto Sans Devanagari',system-ui,sans-serif;background:var(--sage);color:var(--surface);padding:2px 9px;border-radius:999px;vertical-align:middle;margin-left:4px;white-space:nowrap}
 .recbar{margin:16px 0 0;padding:12px 14px;background:var(--sage-soft);border-radius:12px}
@@ -196,9 +197,16 @@ body.printing-plans #printPlans{display:block}
 #printPlans .plan{border:1px solid #bbb;margin:0;padding:2mm}
 #printPlans .plan svg{max-width:none;width:100%;max-height:178mm}
 #printPlans .plan-key{font-size:9pt!important}
+#printPlans .plan text{stroke:#fff;font-weight:600}
+#printPlans .plan .pd,#printPlans .plan .pa{stroke:#444}
+#printPlans .plan .pk{stroke:#8A3E22}
+#printPlans .plan .tk{fill:#8A3E22}
 #printPlans .pdesc{font-size:10pt;margin:2mm 0 0}
-#printPlans .pp.plumb .plan svg{max-height:96mm}
+#printPlans .pp.plumb .plan svg{max-height:108mm}
 #printPlans .pp.plumb .plan-key{margin:1mm 0!important}
+#printPlans .pp.plumb.tall .plan{display:grid;grid-template-columns:auto 1fr;column-gap:6mm;align-content:start}
+#printPlans .pp.plumb.tall .plan > svg{grid-row:1/span 6;height:140mm;width:auto;max-height:none;max-width:none;margin:0}
+#printPlans .pp.plumb.tall .plan-legend{columns:1;margin-top:4mm}
 #printPlans .ptab td:last-child{white-space:nowrap}
 #printPlans .ptab{width:100%;border-collapse:collapse;font-size:8.5pt;line-height:1.3;margin-top:2mm}
 #printPlans .ptab th,#printPlans .ptab td{border:1px solid #999;padding:.6mm 1.4mm;text-align:left;vertical-align:top}
@@ -523,8 +531,8 @@ function planHTML(key,plumb){const p=P[key];if(!p)return '';const m=460;const h=
 let s='<svg viewBox="'+(-m)+' '+(-m)+' '+(p.w+2*m)+' '+(h+m)+'" role="img" aria-label="Dimensioned floor plan, measurements in millimetres">';
 /* switch and socket marks on top, so slabs and cabinets drawn under them don't hide them */const top=i=>i.t==='sw'||i.t==='so',deco=i=>plumb&&['gb','gbv','sw','so'].includes(i.t);p.i.filter(i=>!top(i)&&!deco(i)).concat(p.i.filter(i=>top(i)&&!deco(i))).forEach(i=>s+=item(i));s+='<path class="pw" d="'+p.o+'"/>';p.k.forEach(k=>s+=dim(k));
 if(plumb)plumbPoints(key).forEach((q,n)=>{s+='<circle class="ppm" cx="'+q.m[0]+'" cy="'+q.m[1]+'" r="66"/>'+txt(q.m[0],q.m[1],String(n+1),'ppn');});
-if(plumb)return s+'</svg>'+legendHTML(p,true)+'<p class="plan-key">'+(LANG==='hi'?'प्लंबर के लिए नक्शा: पीछे की दीवार ऊपर, दरवाज़ा नीचे। नीले नंबर नीचे की सूची के प्लंबिंग पॉइंट हैं।':'Plumbing plan: back wall at the top, door at the bottom. Blue numbers mark the plumbing points listed below.')+'</p>';
-s+='</svg>'+legendHTML(p,false)+'<p class="plan-key">'+(LANG==='hi'?'ऊपर से नक्शा: पीछे की दीवार ऊपर, दरवाज़ा नीचे। '+(UNIT==='in'?'नाप इंच में, नज़दीकी ½″ तक':'नाप मिलीमीटर में')+'।':'Plan view, back wall at the top, door at the bottom. '+(UNIT==='in'?'Measurements in inches, to the nearest ½″':'Measurements in mm')+'.')+'</p>';return s;}
+if(plumb)return s+'</svg>'+legendHTML(p,true)+'<p class="plan-key">'+(LANG==='hi'?'प्लंबर के लिए नक्शा: पीछे की दीवार ऊपर, दरवाज़ा नीचे।<br>नीले नंबर नीचे की सूची के प्लंबिंग पॉइंट हैं।':'Plumbing plan: back wall at the top, door at the bottom.<br>Blue numbers mark the plumbing points listed below.')+'</p>';
+s+='</svg>'+legendHTML(p,false)+'<p class="plan-key">'+(LANG==='hi'?'ऊपर से नक्शा: पीछे की दीवार ऊपर, दरवाज़ा नीचे।<br>'+(UNIT==='in'?'नाप इंच में, नज़दीकी ½″ तक':'नाप मिलीमीटर में')+'।':'Plan view, back wall at the top, door at the bottom.<br>'+(UNIT==='in'?'Measurements in inches, to the nearest ½″':'Measurements in mm')+'.')+'</p>';return s;}
 
 /* plumbing points per layout: wall, distance along it (mm), plan mark position, and rows [English, Hindi, height mm | text | null] */
 const PR={
@@ -544,7 +552,7 @@ switch(k){
 case '1':return [PW('door',1300,[1300,1270],PR.seat(820,1)),PW('door',1560,[1560,1080],PR.jet(1)),PW('back',1950,[1950,90],PR.basin),PW('back',450,[450,210],PR.sh1),T1LD];
 case '2':return [PW('right',420,[2160,420],PR.seat(820,1)),PW('right',160,[1960,160],PR.jet(1)),PW('door',1300,[1300,1370],PR.basin),PW('back',450,[450,210],PR.sh1),T1LD];
 case '3':return [PW('back',1325,[1325,190],PR.seat(820,1)),PW('back',1065,[1065,370],PR.jet(1)),PW('back',old?2020:2050,[old?2020:2050,90],PR.basin),PW('back',450,[450,210],PR.sh1),T1LD];
-case '4':return [PW('back',1325,[1325,190],PR.seat(820,1)),PW('back',1065,[1065,370],PR.jet(1)),PW('right',700,[2260,870],PR.basin),PW('back',450,[450,210],PR.sh1),T1LD];
+case '4':return [PW('back',1325,[1325,190],PR.seat(820,1)),PW('back',1065,[1065,370],PR.jet(1)),PW('right',700,[2285,560],PR.basin),PW('back',450,[450,210],PR.sh1),T1LD];
 case '5':return [PW('left',1030,[90,1030],PR.seat(950)),PW('left',1290,[250,1290],PR.jet(0)),PW('back',1930,[1930,90],PR.basin),PW('left',330,[90,330],PR.sh1),PF(150,150,[300,150],PR.sq)];
 case 'T2-1':return [PW('left',1385,[90,1385],PR.seat(950)),PW('left',1645,[250,1620],PR.jet(0)),PW('back',1220,[1220,200],PR.sh2),PS('back',100,1500,[500,210]),PW('right',1372,[1510,1060],PR.basin),PW('right',2115,[1510,1920],top?PR.washT:PR.washF)];
 case 'T2-2':return [PW('left',1385,[90,1385],PR.seat(950)),PW('left',1645,[250,1620],PR.jet(0)),PW('back',1220,[1220,200],PR.sh2),PS('back',100,1500,[500,210]),PW('right',2115,[1510,1920],PR.basinSlab.concat(PR.washF))];
@@ -561,7 +569,7 @@ return H?W_[1]+', '+(W_[2]==='left'?'बाईं':'पीछे की')+' द�
 function heightTxt(h){return h==null?'—':typeof h==='string'?h+' mm':mmIn(h);}
 function plumbTable(k){const H=LANG==='hi';let r='<table class="ptab"><thead><tr><th>#</th><th>'+(H?'क्या':'Point')+'</th><th>'+(H?'कहाँ':'Where')+'</th><th>'+(H?'फ़र्श से ऊँचाई':'Height above floor')+'</th></tr></thead><tbody>';
 plumbPoints(k).forEach((q,n)=>{q.rows.forEach((row,i)=>{r+='<tr>'+(i===0?'<td rowspan="'+q.rows.length+'"><b>'+(n+1)+'</b></td>':'')+'<td>'+(H?row[1]:row[0])+'</td>'+(i===0?'<td rowspan="'+q.rows.length+'">'+whereTxt(q,H)+'</td>':'')+'<td>'+heightTxt(row[2])+'</td></tr>';});});
-return r+'</tbody></table><p class="pnote">'+(H?'दूरी दीवार के साथ बताए गए कोने से पॉइंट के बीच तक, और ऊँचाई तैयार फ़र्श से पॉइंट के बीच तक। ऊँचाइयाँ आम नाप हैं; खरीदी गई फ़िटिंग से मिलाकर पक्का करें। गर्म पानी शावर के ऊपर वाले गीज़र से शावर मिक्सर और बेसिन के गर्म वाल्व तक जाता है।':'Distances run along the wall from the corner named to the centre of the point; heights are from the finished floor to the centre. Heights are typical; confirm them against the fittings bought. Hot water runs from the geyser above the shower to the shower mixer and the basin’s hot valve.')+'</p>';}
+return r+'</tbody></table><p class="pnote">'+(H?'दूरी दीवार के साथ बताए गए कोने से पॉइंट के बीच तक, और ऊँचाई तैयार फ़र्श से पॉइंट के बीच तक।<br>ऊँचाइयाँ आम नाप हैं।<br>खरीदी गई फ़िटिंग से मिलाकर पक्का करें।<br>गर्म पानी शावर के ऊपर वाले गीज़र से शावर मिक्सर और बेसिन के गर्म वाल्व तक जाता है।':'Distances run along the wall from the corner named to the centre of the point.<br>Heights are from the finished floor to the centre.<br>Heights are typical.<br>Confirm them against the fittings bought.<br>Hot water runs from the geyser above the shower to the shower mixer and the basin’s hot valve.')+'</p>';}
 window.planHTML=planHTML;
 document.querySelectorAll('.plan[data-plan]').forEach(el=>{el.innerHTML=planHTML(el.dataset.plan);});
 const ub=document.getElementById('unitBtn');if(ub)ub.addEventListener('click',()=>{UNIT=UNIT==='in'?'mm':'in';ub.textContent=LANG==='hi'?(UNIT==='in'?'mm दिखाएँ':'इंच दिखाएँ'):(UNIT==='in'?'Show mm':'Show inches');document.querySelectorAll('.plan[data-plan]').forEach(el=>{el.innerHTML=planHTML(el.dataset.plan);});if(window.__rebuild)window.__rebuild();});
@@ -576,7 +584,7 @@ function planList(){return [...document.querySelectorAll('main th[data-opt]')].m
 function optDesc(k){const th=document.querySelector('main th[data-opt="'+k+'"]');if(!th)return '';const tb=th.closest('table').tBodies[0];return tb&&tb.rows[0]?tb.rows[0].cells[th.cellIndex].textContent.trim():'';}
 function printPlans(keys,mode){let box=document.getElementById('printPlans');if(!box){box=document.createElement('div');box.id='printPlans';document.body.appendChild(box);}
 let h='';const H=LANG==='hi';
-if(mode==='plumb'){planList().filter(x=>keys.includes(x.k)).forEach(x=>{h+='<section class="pp plumb"><h3>'+x.g+' · '+x.t+' — '+(H?'प्लंबर के लिए':'for the plumber')+'</h3><div class="plan">'+planHTML(x.k,true)+'</div>'+plumbTable(x.k)+'</section>';});box.innerHTML=h;document.body.classList.add('printing-plans');window.print();return;}
+if(mode==='plumb'){planList().filter(x=>keys.includes(x.k)).forEach(x=>{h+='<section class="pp plumb'+(x.k.startsWith('T2')?' tall':'')+'"><h3>'+x.g+' · '+x.t+' — '+(H?'प्लंबर के लिए':'for the plumber')+'</h3><div class="plan">'+planHTML(x.k,true)+'</div>'+plumbTable(x.k)+'</section>';});box.innerHTML=h;document.body.classList.add('printing-plans');window.print();return;}
 const des=document.querySelector('#tDesign [aria-pressed="true"]'),look=des?(H?'डिज़ाइन: ':'Look: ')+des.textContent.trim():'';
 
 planList().filter(x=>keys.includes(x.k)).forEach(x=>{h+='<section class="pp"><h3>'+x.g+' · '+x.t+'</h3><div class="plan">'+planHTML(x.k)+'</div><p class="pdesc">'+optDesc(x.k)+(look?' '+look+'.':'')+'</p></section>';});
@@ -758,7 +766,7 @@ const T=new THREE.Vector3();let r=3.0,th=0.3,ph=1.2;
 const VIEWK={'T2-3':{door:[3.8,-0.6,0.8]},'T2-4':{door:[3.8,-0.75,0.75]}};
 function setView(v){const q=(VIEWK[CUR]&&VIEWK[CUR][v])||VIEW[curRoom][v];r=q[0];th=q[1];ph=q[2];}
 function build(k){const d=L[k];if(!d)return;CUR=k;const t=d.room;const changed=t!==curRoom;room(t);T.set(VIEW[t].T[0],VIEW[t].T[1],VIEW[t].T[2]);S.remove(G);G=new THREE.Group();S.add(G);setStyle();
-d.b();grabBars(k);switchBoard(t,k);const HIx=window.getLang&&window.getLang()==='hi',ch=CAPHI[k]||{};cap.textContent=(window.inchify||String)(HIx?((WASH==='top'&&ch.top)||ch.c)+((t==='t1'&&BAS==='old'&&ch.old)||''):((WASH==='top'&&d.capTop)||d.cap)+((t==='t1'&&BAS==='old'&&d.capOld)||''))+(HIx?' डिज़ाइन: '+DNHI[FIN]+ovr(1)+(t==='t1'&&BAS==='old'&&k!=='4'?', पुराना बेसिन नई कैबिनेट पर।':'।'):' Design: '+ST.f.name+ovr(0)+(t==='t1'&&BAS==='old'&&k!=='4'?', with the existing basin on a new cabinet.':'.'));basSel.style.display=t==='t1'?'':'none';basSel.value=BAS;pick.value=k;finSel.value=FIN;if(window.planHTML)document.getElementById('vplan').innerHTML=window.planHTML(k)+(t==='t2'&&WASH==='top'?'<p class="plan-key">'+(HIx?'नक्शे में फ्रंट-लोड मशीन दिखाई है; टॉप-लोड उसी जगह आती है।':'Shown with a front-load washer; a top-loader takes the same spot.')+'</p>':'')+(t==='t1'&&BAS==='old'&&k!=='4'?'<p class="plan-key">'+(HIx?'नक्शे में नया बेसिन दिखाया है; पुराना 660 × 430 mm का है।':'Shown with a new basin; the existing one is 660 × 430 mm.')+'</p>':'');washSel.style.display=t==='t2'?'':'none';if(changed)setView('door');if(window.__syncUI)window.__syncUI();}
+d.b();grabBars(k);switchBoard(t,k);const HIx=window.getLang&&window.getLang()==='hi',ch=CAPHI[k]||{};cap.textContent=(window.inchify||String)(HIx?((WASH==='top'&&ch.top)||ch.c)+((t==='t1'&&BAS==='old'&&ch.old)||''):((WASH==='top'&&d.capTop)||d.cap)+((t==='t1'&&BAS==='old'&&d.capOld)||''))+(HIx?' डिज़ाइन: '+DNHI[FIN]+ovr(1)+(t==='t1'&&BAS==='old'&&k!=='4'?', पुराना बेसिन नई कैबिनेट पर।':'।'):' Design: '+ST.f.name+ovr(0)+(t==='t1'&&BAS==='old'&&k!=='4'?', with the existing basin on a new cabinet.':'.'));basSel.style.display=t==='t1'?'':'none';basSel.value=BAS;pick.value=k;finSel.value=FIN;if(window.planHTML)document.getElementById('vplan').innerHTML=window.planHTML(k)+(t==='t2'&&WASH==='top'?'<p class="plan-key">'+(HIx?'नक्शे में फ्रंट-लोड मशीन दिखाई है।<br>टॉप-लोड उसी जगह आती है।':'Shown with a front-load washer.<br>A top-loader takes the same spot.')+'</p>':'')+(t==='t1'&&BAS==='old'&&k!=='4'?'<p class="plan-key">'+(HIx?'नक्शे में नया बेसिन दिखाया है।<br>पुराना 660 × 430 mm का है।':'Shown with a new basin.<br>The existing one is 660 × 430 mm.')+'</p>':'');washSel.style.display=t==='t2'?'':'none';if(changed)setView('door');if(window.__syncUI)window.__syncUI();}
 const _bb=new THREE.Box3();
 /* walls are one-sided, so a wall the camera is behind turns see-through; hide the tall parts mounted on it too */
 function wallCut(){G.children.forEach(g=>{if(!g.userData.wall)return;const a=g.rotation.y;const out=(C.position.x-g.position.x)*Math.sin(a)+(C.position.z-g.position.z)*Math.cos(a)<0;g.traverse(m=>{if(!m.isMesh)return;if(m.userData.top===undefined){_bb.setFromObject(m);m.userData.top=_bb.max.y;}m.visible=!(out&&m.userData.top>0.95);});});}
